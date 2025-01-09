@@ -80,7 +80,9 @@ WSGI_APPLICATION = 'TUPCLabEquipment.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default='mysql://root:camus0910@localhost:3306/tupclabequipment')
+    'default': dj_database_url.config(
+        default='mysql+mysqlconnector://root:camus0910@localhost:3306/tupclabequipment'
+    )
 }
 
 
