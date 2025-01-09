@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Laboratory Equipment{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+<header>
+    <img src="{% static 'Media/lab-logo.png' %}" alt="Profile Icon" width="150" height="150"> 
+    <nav>
+        <a href="{% url 'main_homepage' %}">Home</a>
+        <a href="{% url 'add_equipment' %}">Add Equipment</a>
+        <a href="{% url 'remove_equipment' %}">Remove Equipment</a>
+        <a href="{% url 'manage_programs' %}">Manage Programs</a>
+        <a href="{% url 'borrowing_records' %}">Records</a>
+    </nav>
+    <div style="position: relative; display: inline-block;">
+        <img src="{% static 'Media/bell-icon.png' %}" alt="Bell Icon" width="40" height="40" id="notification-button" style="cursor: pointer;">
+    </div>
+    <img src="{% static 'Media/profile-icon.png' %}" alt="Profile Icon" width="40" height="40">
+    <a href="{% url 'account_register' %}">Register Account</a>
+    <a href="{% url 'manage_account' %}">Manage Account</a>
+    <a href="{% url 'change_password' %}">Change Password</a> 
+    <a href="{% url 'logout' %}">Log Out</a>
+</header>
+
+<div id="notification-popup">
+    <h3>Notifications</h3>
+    {% block notifications %}
+        <p>No new notifications.</p>
+    {% endblock %}
+</div>
+
+{% block content %}{% endblock %}
+
+<script>
+</script>
+</body>
+</html>

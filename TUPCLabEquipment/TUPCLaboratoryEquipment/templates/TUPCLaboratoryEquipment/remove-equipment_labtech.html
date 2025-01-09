@@ -1,0 +1,105 @@
+{% extends "labtechnav.html" %}
+
+{% block title %}
+Remove Equipment
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'CSS/removingpage.css' %}">
+
+<div class="container py-4">
+    <h1 class="text-center mb-4">REMOVE EQUIPMENT</h1>
+
+    <!-- Category Form (GET request to filter equipment) -->
+    <form method="get" action="{% url 'remove_equipment' %}" class="mb-4">
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select name="category" id="category" class="form-select" onchange="this.form.submit()">
+                <option value="" disabled selected>SELECT CATEGORY</option>
+                {% for category in categories %}
+                    <option value="{{ category }}" {% if category == request.GET.category %}selected{% endif %}>
+                        {% if category == "glasswares" %}GLASSWARES{% endif %}
+                        {% if category == "labtools" %}GENERAL LAB TOOLS{% endif %}
+                        {% if category == "heavyequipments" %}HEAVY EQUIPMENTS{% endif %}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+
+    <!-- Equipment Removal Form (POST request to remove equipment) -->
+    <form method="post" action="{% url 'remove_equipment' %}">
+        {% csrf_token %}
+
+        <!-- Equipment and Quantity on the Same Line -->
+        <div class="row mb-3">
+            <!-- Equipment Name -->
+            <div class="col-md-6">
+                <label for="equipment" class="form-label">Equipment</label>
+                <select name="equipment" id="equipment" class="form-select" onchange="updateMaxQuantity()">
+                    <option value="" disabled selected>SELECT EQUIPMENT</option>
+                    {% for equipment in equipment_list %}
+                        <option value="{{ equipment.id }}" data-quantity="{{ equipment.quantity }}">
+                            {{ equipment.item }} (Qty: {{ equipment.quantity }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Quantity -->
+            <div class="col-md-6">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input type="number" name="quantity" id="quantity" class="form-control" min="1" placeholder="Enter quantity">
+            </div>
+        </div>
+
+        <!-- Reason for Removal -->
+        <div class="mb-3">
+            <label for="reason" class="form-label">Reason for Removal</label>
+            <select name="reason" id="reason" class="form-select">
+                <option value="" disabled selected>SELECT REASON</option>
+                <option value="lost">Lost</option>
+                <option value="outdated">Outdated</option>
+                <option value="damaged_beyond_repair">Damaged Beyond Repair</option>
+                <option value="incorrect-input">Incorrect Input</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">REMOVE</button>
+        {% if messages %}
+        <div class="alert alert-info mt-3 mb-3">
+            <ul>
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %} 
+    </form>
+</div>
+
+<script>
+    function updateMaxQuantity() {
+        const equipmentDropdown = document.getElementById("equipment");
+        const quantityInput = document.getElementById("quantity");
+
+        // Get the selected option
+        const selectedOption = equipmentDropdown.options[equipmentDropdown.selectedIndex];
+
+        // Get the max quantity from the data attribute
+        const maxQuantity = selectedOption.getAttribute("data-quantity");
+
+        // Update the max attribute of the quantity input
+        if (maxQuantity) {
+            quantityInput.max = maxQuantity;
+            quantityInput.placeholder = `Enter quantity (Max: ${maxQuantity})`;
+        } else {
+            quantityInput.removeAttribute("max");
+            quantityInput.placeholder = "Enter quantity";
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,526 @@
+html, body {
+    overflow-x: hidden;
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    scroll-behavior: smooth;
+}
+
+header {
+    height: 80px;
+    background: radial-gradient(circle, rgb(255, 253, 253), rgb(75, 8, 8));
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(46, 1, 1, 0.534);
+    gap: 20px;
+}
+
+header {
+    transition: height 0.3s ease-in-out;
+}
+
+header.expanded {
+    height: auto; /* Matches the dynamic JavaScript height */
+}
+
+/* Logo Styling */
+.logo img {
+    width: 60px;
+    height: auto;
+}
+
+/* Navigation Styling */
+
+.nav-item a {
+    font-size: 17px;
+    font-weight: bold;
+    color: black;
+    padding: 5px;
+}
+
+.nav-item a:hover {
+    color: #000;
+    border-bottom: 2px solid #000000;
+}
+
+.profile {
+    position: relative;
+    display: inline-block;
+}
+
+/* Add a class to trigger the hover effect when dropdown is open */
+.profile img {
+    cursor: pointer;
+}
+
+
+.profile img:hover {
+    filter: invert(28%) sepia(100%) saturate(7478%) hue-rotate(0deg) brightness(150%) contrast(150%);
+}
+
+.profile.hover-active img {
+    filter: invert(28%) sepia(100%) saturate(7478%) hue-rotate(0deg) brightness(150%) contrast(150%);
+    
+}
+
+.profile-links {
+    display: none;  /* Hidden by default */
+    position: absolute;
+    top: 40px; /* Adjust this value if needed for spacing */
+    right: 100%;  /* This makes the dropdown open to the left of the profile icon */
+    background-color: #f1f1f1;
+    min-width: 160px;
+    border-radius: 2px;
+    z-index: 1;
+}
+
+.profile-links a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+.profile-links a:hover {
+    background-color: #7c7c7c;
+}
+
+/* Separator style between links */
+.profile-links a + a {
+    border-top: 1.5px solid #31313131; /* Adds separator between links */
+
+}
+
+
+/* Welcome Section Styling */
+.welcome-section {
+    display: flex;
+    flex-direction: column;  /* Stack elements vertically on smaller screens */
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, #380000, #000000);  /* Black to gray gradient */
+    color: #ffffff;
+    margin-top: 80px;
+    padding: 0 20px;  /* Add some padding to the left and right on larger screens */
+    box-shadow: 0 4px 10px rgba(17, 10, 10, 0.925);  /* Proper box-shadow syntax */
+}
+
+/* Welcome Text */
+.welcome-section {
+    color: white;
+    text-align: center;  /* Center text for all screen sizes */
+    max-width: 100%;  /* Ensure it takes up full width */
+    padding: 20px;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.2;
+    font-weight: 500;
+    margin-top: 50px;
+}
+
+/* Heading (h1) */
+.welcome-section h1 {
+    margin-top: 30px;
+    font-size: 55px;
+    font-weight: 700;
+    line-height: 1.0;
+
+}
+
+/* Heading (h1) */
+.welcome-section h2 {
+    margin-top: 5px;
+    font-size: 17px;
+    font-weight: 400;
+
+}
+
+/* Paragraph text (p) */
+.welcome-section p {
+    font-size: 20px;
+    margin: 3px 0;
+}
+
+#welcome-section p.fs-5 {
+    font-weight: 600;
+    margin-top:-5px;
+    color: #555;
+}
+/* Make the section responsive for small screens (xs) */
+@media (max-width: 576px) {
+    .welcome-section {
+        padding: 10px;  /* Adjust padding for extra small screens */
+    }
+
+    .welcome-text {
+        font-size: 18px;  /* Reduce font size on very small screens */
+        padding: 10px;
+    }
+
+    .welcome-text h1 {
+        font-size: 30px;  /* Reduce heading size on xs screens */
+    }
+
+    .welcome-text h2 {
+        font-size: 15px;  /* Reduce heading size on xs screens */
+    }
+
+    .welcome-text p {
+        font-size: 14px;  /* Adjust paragraph text size */
+    }
+}
+
+/* Adjust for small screens (sm) */
+@media (max-width: 768px) {
+    .welcome-section {
+        padding: 15px;  /* Adjust padding for small screens */
+    }
+
+    .welcome-text {
+        font-size: 24px;  /* Reduce font size for tablets */
+        padding: 15px;
+    }
+
+    .welcome-text h1 {
+        font-size: 40px;  /* Adjust heading font size */
+    }
+
+    .welcome-text h2 {
+        font-size: 20px;  /* Adjust heading font size */
+    }
+
+    .welcome-text p {
+        font-size: 16px;  /* Adjust paragraph font size */
+    }
+}
+
+/* Adjust for medium screens (md) */
+@media (max-width: 992px) {
+    .welcome-section {
+        padding: 20px;  /* Adjust padding for medium screens */
+    }
+
+    .welcome-text {
+        font-size: 28px;  /* Font size for medium screens */
+        padding: 20px;
+    }
+
+    .welcome-text h1 {
+        font-size: 55px;  /* Adjust heading font size */
+    }
+
+    .welcome-text h2 {
+        font-size: 25px;  /* Adjust heading font size */
+    }
+
+    .welcome-text p {
+        font-size: 18px;  /* Adjust paragraph font size */
+    }
+}
+
+/* Adjust for large screens (lg) */
+@media (max-width: 1200px) {
+    .welcome-section {
+        padding: 20px;  /* Adjust padding for large screens */
+    }
+
+    .welcome-text {
+        font-size: 30px;  /* Font size for large screens */
+    }
+
+    .welcome-text h1 {
+        font-size: 60px;  /* Heading size for large screens */
+    }
+    .welcome-text h1 {
+        font-size: 30px;  /* Heading size for large screens */
+    }
+
+    .welcome-text p {
+        font-size: 18px;  /* Paragraph size for large screens */
+    }
+}
+
+/* Adjust for extra large screens (xl) */
+@media (max-width: 1400px) {
+    .welcome-section {
+        padding: 20px;  /* Keep padding consistent */
+    }
+
+    .welcome-text {
+        font-size: 32px;  /* Font size for extra large screens */
+    }
+
+    .welcome-text h1 {
+        font-size: 65px;  /* Heading size for extra large screens */
+    }
+
+    .welcome-text h2 {
+        font-size: 45px;  /* Heading size for extra large screens */
+    }
+
+    .welcome-text p {
+        font-size: 20px;  /* Paragraph size for extra large screens */
+    }
+}
+
+.category {
+    margin-top: 25px;
+    margin-bottom: 5px;
+    margin-left: 3%;
+    letter-spacing: 1px;
+    text-align: center;
+    font-size: 45px;
+    font-weight: bold;
+    color: #000000;
+    padding: 10px 0;
+}
+
+/* Grid Layout for Carousel Items */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center; /* Centers items horizontally */
+}
+
+.carousel-item {
+    background-color: white;
+    width: 320px;
+    height: 380px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1.5px solid #1f1e1e;
+    margin-bottom: 2%;
+    margin-left: .5%;
+    margin-right: .5%;
+    text-align: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(61, 0, 0, 0.897);
+}
+
+.carousel-item img {
+    width: 250px;   /* Fixed width */
+    height: 250px;  /* Fixed height */
+    object-fit: cover; /* Ensures the image covers the area */
+}
+
+.item-name {
+    margin-top: 3px;
+    margin-bottom: -4px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.quantity {
+    margin-top: -5PX;
+    margin-bottom: 3px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.add-to-cart {
+    font-size: 13px;
+    font-weight: 500;
+    background-color: #610202;
+    color: white;
+    border: none;
+    padding: 10px 0px;
+    border-radius: 0;
+    cursor: pointer;
+    width: 280px;
+    text-align: center;
+    margin-top: auto;
+    transition: background-color 0.2s, text-decoration 0.2s; 
+}
+
+.add-to-cart:hover {
+    background-color: #310101;
+}
+
+.see-more-button {
+    width: 90%;
+    padding: 10px 20px; /* Adjust the padding */
+    background-color: #610202; /* Button background color */
+    color: white; /* Text color */
+    text-decoration: none; /* No underline */
+    border: none; /* No border */
+    font-weight: 600; /* Bold text */
+    font-size: 14px; /* Adjust font size */
+    transition: background-color 0.2s ease; 
+    margin-top: 10px; /* Spacing from elements above */
+}
+
+.see-more-button:hover {
+    background-color: #2b0000; /* Darken the background on hover */
+}
+
+/* Extra Small (xs) - Phone */
+@media (max-width: 575px) {
+    .carousel-item {
+        margin-left: 65px;
+    }
+}
+
+
+/* Medium (md) - Large Tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+    
+    /* Grid Layout for Carousel Items */
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 115px; /* Reduced gap between items */
+    }
+    
+    .carousel-item {
+        background-color: white;
+        width: 320px;
+        height: 380px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        border: 1.5px solid #1f1e1e;
+        margin-bottom: 0;
+        margin-left: -20px;
+        margin-right: 85px;
+        text-align: center;
+        flex-shrink: 0;
+        box-shadow: 0 2px 4px rgba(107, 1, 1, 0.897);
+    }
+    
+    .carousel-item img {
+        width: 250px;   /* Fixed width */
+        height: 250px;  /* Fixed height */
+        object-fit: cover; /* Ensures the image covers the area */
+    }
+    
+    .item-name {
+        margin-top: 3px;
+        margin-bottom: -4px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #000000;
+    }
+    
+    .quantity {
+        margin-top: -5PX;
+        margin-bottom: 3px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #000000;
+    }
+    
+    .add-to-cart {
+        font-size: 13px;
+        font-weight: 500;
+        background-color: #610202;
+        color: white;
+        border: none;
+        padding: 10px 0px;
+        border-radius: 0;
+        cursor: pointer;
+        width: 280px;
+        text-align: center;
+        margin-top: auto;
+        transition: background-color 0.2s, text-decoration 0.2s; 
+    }
+    
+    .add-to-cart:hover {
+        background-color: #310101;
+    }
+    
+    .see-more-button {
+        width: 90%;
+        padding: 10px 20px; /* Adjust the padding */
+        background-color: #610202; /* Button background color */
+        color: white; /* Text color */
+        text-decoration: none; /* No underline */
+        border: none; /* No border */
+        font-weight: 600; /* Bold text */
+        font-size: 14px; /* Adjust font size */
+        transition: background-color 0.2s ease; 
+        margin-top: 10px; /* Spacing from elements above */
+    }
+    
+    .see-more-button:hover {
+        background-color: #2b0000; /* Darken the background on hover */
+    }
+}
+
+
+
+
+.videos-container {
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    gap: 20px;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+}
+
+.video-container iframe {
+    flex: 0 0 auto;
+    width: 250px; 
+    height: 140px;
+    border-radius: 8px;
+    scroll-snap-align: center;
+    box-shadow: #000;
+}
+.about-us {
+    margin-top: 20px;
+    margin-bottom: 0;
+    padding: 2px 0px;
+    background-color: #080808;
+    text-align: center;
+}
+.about-us h2 {
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 5px;
+    margin-bottom: 3px;
+    color: rgb(138, 4, 4);
+}
+.about-us p {
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    line-height: 1.5;
+    text-align:center;
+    margin-bottom: 1.5%;
+}
+
+.rules-section {
+    padding: 15px 15px;
+    background-color: #f9f9f9;
+    box-shadow: #000;
+}
+
+.rules-section h2 {
+    margin-top: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #000000;
+}
+.rules-list {
+    list-style-type: disc;
+    font-size: 18px;
+    line-height: 1.6;
+}

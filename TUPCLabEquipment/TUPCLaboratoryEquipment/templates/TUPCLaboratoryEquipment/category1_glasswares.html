@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLASSWARES</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/seemore.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body class="container my-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-center"><b>GLASSWARES</b></h2>
+        <!-- Home Button -->
+        <a href="{% if request.session.user_type == 'student' %}{% url 'student_homepage' %}{% elif request.session.user_type == 'faculty' %}{% url 'faculty_homepage' %}{% endif %}" class="btn btn-dark">
+            Home
+        </a>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="d-flex justify-content-center align-items-center mb-3">
+        <label for="searchInput" class="mr-2">Search for Glassware:</label>
+        <input type="text" id="searchInput" class="form-control w-25 mr-2" onkeyup="searchGlassware()" oninput="this.value = this.value.toUpperCase();">
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered text-center shadow">
+            <thead class="bg-maroon text-white">
+                <tr>
+                    <th><b>ITEM NAME</b></th>
+                    <th><b>STOCKS</b></th>
+                    <th><b>ACTION</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in glassware_items %}
+                <tr>
+                    <td>{{ item.item }}</td>  
+                    <td>{{ item.quantity }}</td>  
+                    <td>
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <input type="hidden" name="item_id" value="{{ item.id }}">
+                            <button type="submit" class="btn btn-success">Add to Tray</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No glassware items found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>            
+        </table>
+    </div>
+
+    <!-- Search Script -->
+    <script>
+        function searchGlassware() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase(); 
+            const rows = document.querySelectorAll('table tbody tr'); 
+            
+            rows.forEach(row => {
+                const itemName = row.cells[0].textContent.toLowerCase(); 
+                const itemWords = itemName.split(' '); 
+                const firstWord = itemWords[0]; 
+                const secondWord = itemWords.length > 1 ? itemWords[1] : ''; 
+    
+                row.style.display = firstWord.startsWith(searchInput) || secondWord.startsWith(searchInput) ? '' : 'none';
+            });
+        }
+    </script>
+
+</body>
+</html>

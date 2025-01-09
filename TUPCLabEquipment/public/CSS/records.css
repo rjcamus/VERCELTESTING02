@@ -1,0 +1,144 @@
+/* Global Styles */
+/* Container Styling */
+.container-1 {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.473);
+    padding: 30px;
+    max-width: 1100px;
+    margin-top: 90px;
+    margin-bottom: 15px;
+    margin-left: 130px;
+    position: sticky;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Centering h2 */
+h1 {
+    text-align: center;
+    margin-top: 80px;
+    font-size: 2rem; /* Use responsive font size */
+    font-weight: 700;
+    color: #353535;
+    margin-bottom: 5px;
+}
+
+/* Search Container Styles */
+#search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 20px;  
+    top: 80px;
+    background-color: #f4f4f4;
+    max-width: 100%;
+}
+
+#search-bar {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1;
+    font-size: 1rem;
+}
+
+#search-button {
+    color: #ffffff;
+    background-color: #750000;
+    padding: 5px 10px;  /* Padding inside the button */
+    font-size: 15px;  /* Button font size */
+    font-weight: 600;
+    bottom: 0;
+    white-space: nowrap;  /* Ensure the button text doesn't wrap */
+    border-radius: 2px;
+    transition: background-color 0.2s, color 0.2s, border 0.2s; /* Smooth transition */
+
+}
+
+#search-button:hover {
+    background-color: #4b0001;
+}
+
+
+/* Dropdown Styles */
+#sort-dropdown {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+    z-index: 5; /* Added z-index for dropdown if needed */
+}
+
+.btn:focus {
+    outline: none;          /* Removes the outline when the button is focused */
+    box-shadow: none;       /* Removes the box-shadow when the button is focused */
+    color: none;         /* Prevents text color change when focused */
+    background-color: none; /* Prevents background color change when focused */
+}
+
+
+/* Base styles for the button */
+.btn-success {
+    color: #ffffff;
+    background-color: #750000;
+    padding: 5px 10px;  /* Padding inside the button */
+    font-size: 15px;  /* Button font size */
+    font-weight: 600;
+    margin-bottom: 0;
+    white-space: nowrap;  /* Ensure the button text doesn't wrap */
+    border: 2px solid transparent;  /* Border to match background when hovered */
+    border-radius: 2px;
+    transition: background-color 0.2s, color 0.2s, border 0.2s; /* Smooth transition */
+}
+
+/* Hover effect for the button */
+.btn-success:hover {
+    background-color: #420000;  /* Darker red for hover */
+    color: #fff;  /* Ensure text stays white */
+    border-color: #420000;  /* Border color changes to match hover background */
+    border-radius: 2px;
+}
+
+
+/* Table Styles */
+.table-responsive {
+    overflow-x: auto; /* Enable horizontal scroll on smaller screens */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    top: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+th, td {
+    text-align: center;
+    padding: 13px;
+}
+
+th {
+    background-color: #353535;
+    color: #000000;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #b2b2b3;
+}
+
+ul {
+    list-style: disc; /* Adds bullets to the list */
+}

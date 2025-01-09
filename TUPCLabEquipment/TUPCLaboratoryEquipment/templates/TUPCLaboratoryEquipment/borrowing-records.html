@@ -1,0 +1,91 @@
+{% extends "labtechnav.html" %}
+
+{% block title %}
+Records
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'CSS/records.css' %}">
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>BORROWING TRANSACTION RECORDS</h1>
+        </div>
+    </div>
+
+    <div class="row my-3 justify-content-center">
+        <!-- Search Bar and Filter -->
+        <div class="col-12 col-md-5 d-flex mb-3 justify-content-center">
+            <input type="text" id="search-bar" class="form-control me-2" placeholder="Search..." onkeyup="filterRecords()"> <!-- Calls the function on keyup -->
+            <button id="search-button" class="btn btn-primary" onclick="filterRecords()">Search</button> <!-- Calls the function on click -->
+        </div>
+
+        <!-- Filter and Generate Report Button -->
+        <div class="col-12 col-md-5 d-flex mb-3 justify-content-center">
+            <select id="status-filter" class="form-select w-auto me-2" onchange="filterRecords()">
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="accepted">Accepted</option>
+                <option value="handed in">Handed In</option>
+                <option value="returned">Returned</option>
+                <option value="overdue">Overdue</option>
+                <option value="rejected">Rejected</option>  <!-- Added Rejected -->
+            </select>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#generateReportModal">
+                Generate Report
+            </button>
+        </div>
+    </div>
+
+    <!-- Records Table -->
+    <div class="row">
+        <div class="col-12">
+            {% include 'recordstable.html' %}
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Generate Report -->
+<div class="modal fade" id="generateReportModal" tabindex="-1" aria-labelledby="generateReportModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="generateReportModalLabel">Generate Report</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Status Filter -->
+                <div class="mb-3">
+                    <label for="status-modal" class="form-label">Records Status</label>
+                    <select id="status-modal" class="form-select">
+                        <option value="all">All</option>
+                        <option value="pending">Pending</option>
+                        <option value="accepted">Accepted</option>
+                        <option value="handed in">Handed In</option>
+                        <option value="returned">Returned</option>
+                        <option value="overdue">Overdue</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                </div>
+
+                <!-- Single Month Selection -->
+                <div class="mb-3">
+                    <label for="report-month" class="form-label">Select Month</label>
+                    <input type="month" id="report-month" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" onclick="generateReport()">Generate Report</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'JavaScript/borrowingrecords.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,1365 @@
+:root {
+    --primary-color: #8A0303;
+    --dark-color: #990101;
+    --bg-color: #fff;
+    --text-color: #333;
+    --placeholder-color: #7a7a7a;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+h1 {
+    font-weight: 800;
+    color: #000;
+    font-size: 75px;
+    line-height: 69px;
+    text-align: left;
+    margin-left: 55px;
+}
+
+
+label {
+    display: block;
+    font-weight: 700;
+    margin: 0 0 8px 55px;
+    color: var(--text-color);
+}
+
+input[type="email"]{
+    width: 500px;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #a7a4a4;
+    border-radius: 3px;
+    font-size: 15px;
+    margin-left: 55px;
+}
+
+
+
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+    color: var(--placeholder-color);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 700;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 50%;
+    margin: 25px auto 5px 125px; /* Centering adjustments */
+}
+
+button:hover{
+    background-color: #6B0202;
+}
+
+.forgot-password-link {
+    font-weight: 700;
+    color: #8A0303;
+    text-decoration: none;
+    margin-left:  405px;
+}
+
+.register-account-link {
+    font-weight: 700;
+    color: #8A0303;
+    text-decoration: none;
+    margin-left:  200px;
+}
+   
+   .register-account-link:hover {
+    text-decoration: underline;
+}
+
+.forgot-password-link:hover,
+.register-account-link:hover {
+    text-decoration: underline;
+}
+
+.image-container {
+    position: relative;
+}
+
+.image-container::before {
+    content: '';
+    position: absolute;
+    top: 75px;
+    left: 5px;
+    width: 1000px;
+    height: 1000px;
+    background: linear-gradient(to bottom, var(--dark-color), #000000);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.image-container img {
+    position: relative;
+    width: 105%;
+    left: 45px;
+    bottom: 15px;
+    height: auto;
+    z-index: 1;
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 28px;
+}
+
+.password-container input {
+    width: 500px;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #a7a4a4;
+    border-radius: 3px;
+    font-size: 15px;
+    margin-left: 28px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 210px; /* Position inside the input */
+    cursor: pointer;
+    color: #888;
+}
+
+.password-toggle:hover {
+    color: #555;
+}
+
+/* General Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 120px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 600px;
+}
+
+/* Shared Input Styles */
+.modal-content input {
+    display: block;
+    width: 90%;
+    padding: 12px;
+    margin: 10px auto 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Shared Button Styles */
+.modal-content button {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 700;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: 10px auto 0;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: #6B0202;
+}
+
+/* Shared Close Button Styles */
+.close {
+    color: #888;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+}
+
+.password-label {
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap; /* Prevents the text from wrapping to a new line */
+    margin-right: 150px;
+}
+
+/* Password Toggle */
+.password-showhide {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    text-align: center;
+    width: 90%;
+
+}
+
+.password-showhide input[type="checkbox"] {
+    cursor: pointer;
+}
+
+#spinner-container {
+    display: none;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10; /* Ensure it appears in front of other elements */
+}
+
+#spinner {
+    margin-right: 10px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #070707;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loading-text {
+    font-size: 18px;
+    color: #000000; /* Text color */
+    z-index: 20; /* Ensure the text is in front of the spinner */
+    margin-left: 5px;
+}
+
+#loading-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Low opacity background */
+    z-index: 5; /* Ensure overlay is behind spinner and text */
+}
+
+
+@media (max-width: 576px) {
+    body {
+        align-items: center; 
+        justify-content: center;
+        flex-direction: column;
+        height: auto; 
+    }
+
+    h1 {
+        font-size: 50px; 
+        line-height: normal;
+        text-align: center;
+    }
+
+    .form-container {
+        text-align: center; 
+        width: 90%; 
+    }
+
+    label {
+        display: block;
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 3px;
+        color: #333;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+
+    input[type="email"] {
+        width: 95%; 
+        max-width: 300px; 
+        margin: 0px 5px;
+        padding: 10px; 
+    }
+
+    .password-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-left: 25px;
+    }
+    
+    .password-container input {
+        width: 95%; 
+        max-width: 300px; 
+        margin-bottom: 5px;
+        border: 1px solid #a7a4a4;
+        border-radius: 3px;
+        font-size: 15px;
+        margin-left:25px;
+    }
+    
+    .password-toggle {
+        position: absolute;
+        right: 60px; /* Position inside the input */
+        cursor: pointer;
+        color: #888;
+    }
+    
+    .password-toggle:hover {
+        color: #555;
+    }
+
+    button {
+        width: 50%; 
+        max-width: 300px; 
+        margin: 3px auto; 
+        padding: 8px; 
+        font-size: 14px; 
+    }
+
+    .forgot-password-link, .register-account-link {
+        font-size: 15px;
+        margin-left: 0; /* Center links */
+        display: block; /* Ensure links stack vertically */
+        margin-top: 5px; /* Space above links */
+        font-size: 14px; /* Smaller font size */
+        z-index: 0;
+    }
+
+    .image-container {
+        width: 100%; 
+        max-width: 300px; 
+    }
+
+    .image-container::before {
+        background: linear-gradient(to right, var(--dark-color), #350000);
+        top: 5%;
+        bottom: -55%; 
+        left: 50%;
+        width: 150vw; 
+        height: 150vw;
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+
+    .image-container img {
+        right:75%;
+        left: 0;
+        width: 100%; 
+        max-width: 600px; 
+    }  
+
+    .modal-content {
+        width: 90%;
+        max-width: 300px;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 15px;
+    }
+
+    .close {
+        font-size: 15px;
+    }
+
+    /* Input fields for modals */
+    .forgot-password-input,
+    .otp-input,
+    .change-password-input {
+        width: 90%;
+        padding: 6%;
+        margin: 0 auto 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        box-sizing: border-box;
+        font-size: 12px;
+    }
+
+    /* Button Styles for Modals */
+    .forgot-password-button,
+    .otp-button,
+    .change-password-button {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 700;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 12px;
+        display: block;
+        margin: 5px auto 0;
+    }
+
+    .forgot-password-button:hover,
+    .otp-button:hover,
+    .change-password-button:hover {
+        background-color: #6B0202;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    body {
+        align-items: center; 
+        justify-content: center;
+        flex-direction: column;
+        height: auto; 
+    }
+
+    h1 {
+        font-size: 55px; 
+        line-height: normal;
+        text-align: center; 
+        margin: -5px 0 0 10px;
+    }
+
+    .form-container {
+        text-align: center; 
+        width: 80%; 
+    }
+
+    label {
+        display: block;
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 3px;
+        color: #333;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+
+    input[type="email"] {
+        width: 95%; 
+        margin-left: 0;
+        max-width: 500px; 
+        margin: 0px 5px;
+        padding: 10px; 
+    }
+
+    .password-container {
+        width: 95%; 
+        max-width: 500px; 
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-left: 8px;
+    }
+    
+    .password-container input {
+        width: 95%; 
+        max-width: 500px; 
+        margin-bottom: 5px;
+        border: 1px solid #a7a4a4;
+        border-radius: 3px;
+        font-size: 15px;
+        margin-left: 8px;
+    }
+    
+    .password-toggle {
+        position: absolute;
+        right: 30px; /* Position inside the input */
+        cursor: pointer;
+        color: #888;
+    }
+    
+
+    button {
+        width: 70%; 
+        max-width: 300px; 
+        margin: 3px auto; 
+        padding: 10px; 
+        font-size: 15px; 
+    }
+
+    .register-account-link {
+        font-size: 20px;
+        margin-left: 0; /* Center links */
+        display: block; /* Ensure links stack vertically */
+        font-size: 14px; /* Smaller font size */
+        z-index: 0;
+    }
+
+    .forgot-password-link {
+        font-size: 20px;
+        margin-left: 0; /* Center links */
+        display: block; /* Ensure links stack vertically */
+        margin-top: 5px; /* Space above links */
+        font-size: 14px; /* Smaller font size */
+        z-index: 0;
+    }
+
+    .image-container {
+        width: 80%; 
+        max-width: 300px; 
+    }
+
+    .image-container::before {
+        background: linear-gradient(to right, var(--dark-color), #460000);
+        top: 10%;
+        bottom: -25%; 
+        left: 55%;
+        width: 150vw; 
+        height: 150vw;
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+
+    .image-container img {
+        margin-top: 10px;
+        left: 10px;
+        width: 90%; 
+        max-width: 900px; 
+    }  
+
+    .modal-content {
+        width: 90%;
+        max-width: 300px;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 25px;
+        margin-bottom: 0;
+    }
+
+    .close {
+        font-size: 15px;
+    }
+
+    /* Input fields for modals */
+    .forgot-password-input,
+    .otp-input,
+    .change-password-input {
+        width: 90%;
+        padding: 6%;
+        margin: 5px auto 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        box-sizing: border-box;
+        font-size: 12px;
+    }
+
+    /* Button Styles for Modals */
+    .forgot-password-button,
+    .otp-button,
+    .change-password-button {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 700;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 12px;
+        display: block;
+        margin: 5px auto 0;
+    }
+
+    .forgot-password-button:hover,
+    .otp-button:hover,
+    .change-password-button:hover {
+        background-color: #6B0202;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    body {
+        align-items: center; 
+        justify-content: center;
+        flex-direction: column;
+        height: auto; 
+    }
+
+    h1 {
+        font-size: 45px; 
+        line-height: normal;
+        text-align: center; 
+        margin-right: 25px;
+    }
+
+    .form-container {
+        text-align: center; 
+        width: 80%; 
+    }
+
+    label {
+        display: block;
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 3px;
+        color: #333;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+
+    input[type="email"] {
+        width: 100%; /* Full width of the parent container */
+        max-width: 500px; /* Maximum width constraint */
+        margin: 0 5px; /* Horizontal spacing */
+        padding: 10px;
+        border: 1px solid #a7a4a4;
+        border-radius: 3px;
+        font-size: 15px;
+    }
+    
+    .password-container {
+        width: 100%; /* Full width of the parent container */
+        max-width: 520px; /* Maximum width constraint */
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-left: 0; /* Removed the left margin for better alignment */
+    }
+    
+    .password-container input {
+        width: 100%; /* Full width of the container */
+        max-width: 520px; /* Maximum width constraint */
+        margin-bottom: 5px;
+        border: 1px solid #a7a4a4;
+        border-radius: 3px;
+        font-size: 15px;
+        padding: 10px; /* Ensure padding is consistent */
+    }
+    
+    .password-toggle {
+        position: absolute;
+        right: 15px; /* Adjusted for better placement inside the input */
+        cursor: pointer;
+        color: #888;
+    }
+    
+    .password-toggle:hover {
+        color: #555;
+    }
+    
+
+    button {
+        width: 70%; 
+        max-width: 300px; 
+        margin: 3px auto; 
+        padding: 10px; 
+        font-size: 15px; 
+    }
+
+    .register-account-link {
+        font-size: 25px;
+        margin-left: 0; /* Center links */
+        display: block; /* Ensure links stack vertically */
+        font-size: 14px; /* Smaller font size */
+        z-index: 0;
+    }
+
+    .forgot-password-link {
+        font-size: 25px;
+        margin-left: 0; /* Center links */
+        display: block; /* Ensure links stack vertically */
+        margin-top: 5px; /* Space above links */
+        font-size: 14px; /* Smaller font size */
+        z-index: 0;
+    }
+
+    .image-container {
+        width: 80%; 
+        max-width: 300px; 
+    }
+
+    .image-container::before {
+        background: linear-gradient(to right, var(--dark-color), #460000);
+        top: 9%;
+        bottom: -25%; 
+        left: 55%;
+        width: 150vw; 
+        height: 150vw;
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+
+    .image-container img {
+        margin-top: -3px;
+        left: -35px;
+        width: 125%; 
+        max-width: 900px; 
+    }  
+
+    .modal-content {
+        width: 90%;
+        max-width: 300px;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 25px;
+        margin-bottom: 0;
+    }
+
+    .close {
+        font-size: 15px;
+    }
+
+    /* Input fields for modals */
+    .forgot-password-input,
+    .otp-input,
+    .change-password-input {
+        width: 90%;
+        padding: 6%;
+        margin: 5px auto 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        box-sizing: border-box;
+        font-size: 12px;
+    }
+
+    /* Button Styles for Modals */
+    .forgot-password-button,
+    .otp-button,
+    .change-password-button {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 700;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 12px;
+        display: block;
+        margin: 5px auto 0;
+    }
+
+    .forgot-password-button:hover,
+    .otp-button:hover,
+    .change-password-button:hover {
+        background-color: #6B0202;
+    }
+}
+/* Media Query for Large, Extra Large, and XXL */
+@media (min-width: 992px) and (max-width: 1080px) {
+   
+    body {
+        align-items: center; 
+        justify-content: center;
+        flex-direction: column;
+        height: auto; 
+    }
+
+    h1 {
+        font-size: 45px; 
+        line-height: normal;
+        text-align: center; 
+        margin-right: 25px;
+    }
+
+    .form-container {
+        text-align: center; 
+        width: 80%; 
+    }
+
+    label {
+        display: block;
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 3px;
+        color: #333;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+
+    input[type="email"] {
+        width: 95%; 
+        max-width: 500px; 
+        margin: 0px 0px;
+        padding: 10px; 
+    }
+
+    .password-container {
+        width: 95%; 
+        max-width: 500px; 
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-left: 100px;
+    }
+    
+    .password-container input {
+        width: 95%; 
+        max-width: 500px; 
+        margin-bottom: 5px;
+        border: 1px solid #a7a4a4;
+        border-radius: 3px;
+    }
+    
+    .password-showhide {
+        position: absolute;
+        right: 0; /* Position inside the input */
+        cursor: pointer;
+        color: #888;
+    }
+    
+
+    button {
+        width: 70%; 
+        max-width: 300px; 
+        margin: 3px auto; 
+        padding: 10px; 
+        font-size: 15px; 
+    }
+
+    .register-account-link {
+        font-size: 20px;
+        margin-left: 0; /* Center links */
+        display: block; /* Ensure links stack vertically */
+        font-size: 14px; /* Smaller font size */
+        z-index: 0;
+    }
+
+    .forgot-password-link {
+        font-size: 20px;
+        margin-left: 0; /* Center links */
+        display: block; /* Ensure links stack vertically */
+        margin-top: 5px; /* Space above links */
+        font-size: 14px; /* Smaller font size */
+        z-index: 0;
+    }
+
+    .image-container {
+        width: 80%; 
+        max-width: 300px; 
+    }
+
+    .image-container::before {
+        background: linear-gradient(to right, var(--dark-color), #460000);
+        top: 9%;
+        bottom: -25%; 
+        left: 55%;
+        width: 150vw; 
+        height: 150vw;
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+
+    .image-container img {
+        margin-top: -3px;
+        left: -65px;
+        width: 130%; 
+        max-width: 900px; 
+    }  
+
+    .modal-content {
+        width: 90%;
+        max-width: 300px;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 25px;
+        margin-bottom: 0;
+    }
+
+    .close {
+        font-size: 15px;
+    }
+
+    /* Input fields for modals */
+    .forgot-password-input,
+    .otp-input,
+    .change-password-input {
+        width: 90%;
+        padding: 6%;
+        margin: 5px auto 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        box-sizing: border-box;
+        font-size: 12px;
+    }
+
+    /* Button Styles for Modals */
+    .forgot-password-button,
+    .otp-button,
+    .change-password-button {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 700;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 12px;
+        display: block;
+        margin: 5px auto 0;
+    }
+
+    .forgot-password-button:hover,
+    .otp-button:hover,
+    .change-password-button:hover {
+        background-color: #6B0202;
+    }
+}
+
+@media (min-width: 1080px) and (max-width: 1200px) {
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: var(--bg-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 32px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    h1 {
+        font-weight: 800;
+        color: #000;
+        font-size: 75px;
+        line-height: 69px;
+        text-align: left;
+        margin-left: 45px;
+        margin-bottom: 5px;
+    }
+    
+    
+    label {
+        display: block;
+        font-weight: 700;
+        margin: 0 0 8px 55px;
+        color: var(--text-color);
+    }
+    
+    
+    
+    input[type="email"]::placeholder,
+    input[type="password"]::placeholder {
+        color: var(--placeholder-color);
+    }
+    
+    button {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 700;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        width: 50%;
+        margin: 25px auto 5px 125px; /* Centering adjustments */
+    }
+    
+    button:hover{
+        background-color: #6B0202;
+    }
+    
+    .forgot-password-link {
+        font-weight: 700;
+        color: #8A0303;
+        text-decoration: none;
+        margin-left:  405px;
+    }
+    
+    .register-account-link {
+        font-weight: 700;
+        color: #8A0303;
+        text-decoration: none;
+        margin-left:  150px;
+    }
+       
+       .register-account-link:hover {
+        text-decoration: underline;
+    }
+    
+    .forgot-password-link:hover,
+    .register-account-link:hover {
+        text-decoration: underline;
+    }
+    
+    .image-container {
+        position: relative;
+    }
+    
+    .image-container::before {
+        content: '';
+        position: absolute;
+        top: -140px;
+        bottom: 0;
+        left: 35px;
+        width: 1000px;
+        height: 1000px;
+        background: linear-gradient(to bottom, var(--dark-color), #000000);
+        border-radius: 50%;
+        z-index: 0;
+    }
+    
+    .image-container img {
+        position: relative;
+        width: 105%;
+        left: 45px;
+        bottom: 15px;
+        height: auto;
+        z-index: 1;
+    }
+    
+    .password-container {
+        
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-left: 28px;
+    }
+    
+    .password-container input {
+        width: 500px;
+        padding: 10px;
+        margin-bottom: 5px;
+        border: 1px solid #a7a4a4;
+        border-radius: 3px;
+        font-size: 15px;
+        margin-left: 28px;
+    }
+    
+    .password-toggle {
+        position: absolute;
+        right: 20px; /* Position inside the input */
+        cursor: pointer;
+        color: #888;
+    }
+    
+    .password-toggle:hover {
+        color: #555;
+    }
+    
+    /* General Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+    
+    .modal-content {
+        background-color: #ffffff;
+        margin: 120px auto;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 600px;
+    }
+    
+    /* Shared Input Styles */
+    .modal-content input {
+        display: block;
+        width: 90%;
+        padding: 12px;
+        margin: 10px auto 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+    
+    /* Shared Button Styles */
+    .modal-content button {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 700;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        display: block;
+        margin: 10px auto 0;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+    
+    .modal-content button:hover {
+        background-color: #6B0202;
+    }
+    
+    /* Shared Close Button Styles */
+    .close {
+        color: #888;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        float: right;
+    }
+    
+    .close:hover,
+    .close:focus {
+        color: #000;
+    }
+    
+    .password-label {
+        font-size: 14px;
+        color: #555;
+        cursor: pointer;
+        margin-left: 10px;
+        display: inline-block;
+        vertical-align: middle;
+        white-space: nowrap; /* Prevents the text from wrapping to a new line */
+        margin-right: 150px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1440px) {
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: var(--bg-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 32px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    h1 {
+        font-weight: 800;
+        color: #000;
+        font-size: 75px;
+        line-height: 69px;
+        text-align: left;
+        margin-left: 45px;
+        margin-bottom: 5px;
+    }
+    
+    
+    label {
+        display: block;
+        font-weight: 700;
+        margin: 0 0 8px 55px;
+        color: var(--text-color);
+    }
+    
+    
+    
+    input[type="email"]::placeholder,
+    input[type="password"]::placeholder {
+        color: var(--placeholder-color);
+    }
+    
+    button {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 700;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        width: 50%;
+        margin: 25px auto 5px 125px; /* Centering adjustments */
+    }
+    
+    button:hover{
+        background-color: #6B0202;
+    }
+    
+    .forgot-password-link {
+        font-weight: 700;
+        color: #8A0303;
+        text-decoration: none;
+        margin-left:  405px;
+    }
+    
+    .register-account-link {
+        font-weight: 700;
+        color: #8A0303;
+        text-decoration: none;
+        margin-left:  150px;
+    }
+       
+       .register-account-link:hover {
+        text-decoration: underline;
+    }
+    
+    .forgot-password-link:hover,
+    .register-account-link:hover {
+        text-decoration: underline;
+    }
+    
+    .image-container {
+        position: relative;
+    }
+    
+    .image-container::before {
+        content: '';
+        position: absolute;
+        top: -140px;
+        bottom: 0;
+        left: 35px;
+        width: 1000px;
+        height: 1000px;
+        background: linear-gradient(to bottom, var(--dark-color), #000000);
+        border-radius: 50%;
+        z-index: 0;
+    }
+    
+    .image-container img {
+        position: relative;
+        width: 105%;
+        left: 45px;
+        bottom: 15px;
+        height: auto;
+        z-index: 1;
+    }
+    
+    .password-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-left: 28px; /* Align the container */
+    }
+    
+    .password-container input {
+        width: 500px;
+        padding: 10px;
+        margin-bottom: 5px;
+        border: 1px solid #a7a4a4;
+        border-radius: 3px;
+        font-size: 15px;
+        margin-left: 0; /* Removed conflicting margin */
+    }
+    
+    .password-toggle {
+        position: absolute;
+        right: 15px; /* Adjusted for better placement inside the input */
+        cursor: pointer;
+        color: #888;
+    }
+    
+    input[type="email"] {
+        width: 500px;
+        padding: 10px;
+        margin-bottom: 5px;
+        border: 1px solid #a7a4a4;
+        border-radius: 3px;
+        font-size: 15px;
+        margin-left: 0; /* Consistent margin */
+    }
+    
+    
+    .password-toggle:hover {
+        color: #555;
+    }
+    
+    /* General Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+    
+    .modal-content {
+        background-color: #ffffff;
+        margin: 120px auto;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 600px;
+    }
+    
+    /* Shared Input Styles */
+    .modal-content input {
+        display: block;
+        width: 90%;
+        padding: 12px;
+        margin: 10px auto 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+    
+    /* Shared Button Styles */
+    .modal-content button {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 700;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        display: block;
+        margin: 10px auto 0;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+    
+    .modal-content button:hover {
+        background-color: #6B0202;
+    }
+    
+    /* Shared Close Button Styles */
+    .close {
+        color: #888;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        float: right;
+    }
+    
+    .close:hover,
+    .close:focus {
+        color: #000;
+    }
+}    

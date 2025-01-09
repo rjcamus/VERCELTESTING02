@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Tray</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add CSS to position the Home button in the upper left corner */
+        .home-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 100;
+        }
+    </style>
+
+</head>
+<body class="container">
+
+    <a href="{% url 'faculty_homepage' %}" class="btn btn-secondary home-button">Home</a>
+
+    <h1><b>TRAY</b></h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ITEMS</th>
+                <th>QUANTITY</th>
+                <th>ACTION</th> 
+            </tr>
+        </thead>
+        <tbody>
+            {% if cart_items %}
+                {% for cart_item in cart_items %}
+                <tr>
+                    <td>{{ cart_item.item }}</td>
+                    <td>{{ cart_item.quantity }}</td>
+                    <td>
+                        <form method="POST" action="{% url 'cart_faculty' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ cart_item.id }}">
+                            <input type="number" name="quantity" value="{{ cart_item.quantity }}" min="1">
+                            <button type="submit" name="update_quantity" value="true" class="btn btn-primary btn-sm">EDIT QUANTITY</button>
+                        </form>
+                        <form method="POST" action="{% url 'cart_faculty' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="delete_item_id" value="{{ cart_item.id }}">
+                            <button type="submit" name="delete_item" value="true" class="btn btn-danger btn-sm">REMOVE</button>
+                        </form>
+                    </td> 
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="3">Your cart is empty.</td>
+                </tr>
+            {% endif %}
+        </tbody>        
+    </table>
+
+    <form method="POST" action="{% url 'cart_faculty' %}" onsubmit="disablePage()">
+        {% csrf_token %}
+        <div class="input-group">
+            <label for="reservation-date" class="form-label mb-0">Select Reservation Date:</label>
+            <input type="date" id="reservation-date" name="reservation_date" required class="form-control" min="{{ today_date|date:'Y-m-d' }}">
+            <button type="submit" id="reserve-button" name="reserve_items" value="true" class="btn btn-maroon" {% if not cart_items %}disabled{% endif %}>Reserve</button>
+
+
+            {% if messages %}
+            <div class="alert alert-info mt-3 mb-3 fixed-bottom">
+                <ul>
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+
+        </div>
+    </form>
+    
+    <script src="{% static 'JavaScript/cart.js' %}"></script>
+
+</body>
+</html>

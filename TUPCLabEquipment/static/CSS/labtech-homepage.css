@@ -1,0 +1,96 @@
+/* Global Styles */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Centering h2 */
+h2 {
+    text-align: center;
+    margin-top: 100px;
+    font-size: 2rem; /* Use responsive font size */
+    font-weight: 700;
+    color: #353535;
+    margin-bottom: 15px;
+}
+
+/* Search Container Styles */
+#search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: sticky;
+    top: 80px;
+    z-index: 1; /* Adjusted z-index to prevent overlap */
+    background-color: #f4f4f4;
+    max-width: 100%;
+}
+
+#search-bar {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1;
+    font-size: 1rem;
+}
+
+#search-button {
+    padding: 10px 20px;
+    background-color: #5c0101;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#search-button:hover {
+    background-color: #4b0001;
+}
+
+/* Dropdown Styles */
+#sort-dropdown {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+    z-index: 5; /* Added z-index for dropdown if needed */
+}
+
+/* Table Styles */
+.table-responsive {
+    overflow-x: auto; /* Enable horizontal scroll on smaller screens */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.815);
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #7c7c7c; /* Gray border */
+}
+
+th, td {
+    text-align: center;
+    padding: 13px;
+}
+
+th {
+    background-color: #353535;
+    color: #000000;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #b2b2b3;
+}

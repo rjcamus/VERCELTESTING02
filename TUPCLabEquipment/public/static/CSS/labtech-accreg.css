@@ -1,0 +1,72 @@
+body {
+   font-family: 'Montserrat', sans-serif;
+   background-color: #f4f4f4;
+}
+/* Custom Styles */
+.register-box {
+   background-color: white;
+   border-radius: 20px;
+   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.719);
+   padding: 30px;
+   max-width: auto;
+   margin-top: 65px;
+   margin-bottom: auto;
+   justify-content: center;
+}
+
+.heading {
+   font-family: 'Montserrat', sans-serif; /* Font for the heading */
+   color: #2c3e50; /* Dark color for heading */
+   font-size: 2rem; /* Font size */
+   font-weight: 600;
+}
+
+.form-group label {
+   font-weight: bold;
+   color: #303030; /* Slightly lighter dark color for labels */
+}
+
+.form-control {
+   border-radius: 4px; /* Rounded borders for inputs */
+   padding: 10px; /* Internal padding for inputs */
+   margin-bottom: 15px; /* Space between form fields */
+}
+
+.btn-primary {
+   background-color: #8a0404; /* Primary button color */
+   border: none; /* Remove border */
+   padding: 12px 0; /* Vertical padding */
+   font-size: 1.1rem; /* Font size */
+   border-radius: 4px; /* Rounded button corners */
+}
+
+.btn-primary:hover {
+   background-color: #470202; /* Darker shade for hover effect */
+   cursor: pointer;
+}
+
+.form-control:focus, .btn:focus {
+   outline: black;
+   box-shadow: none;
+}
+
+.password-toggle {
+   position: absolute;
+   right: 10px;
+   top: 18px;
+   cursor: pointer;
+   color: #3b3b3b; /* Adjust as needed */
+   z-index: 10;
+}
+
+.password-toggle:hover {
+   color: #000000; /* Change color on hover if needed */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+   .register-box {
+       padding: 20px; /* Less padding for smaller screens */
+       margin-bottom: 10px;
+   }
+}

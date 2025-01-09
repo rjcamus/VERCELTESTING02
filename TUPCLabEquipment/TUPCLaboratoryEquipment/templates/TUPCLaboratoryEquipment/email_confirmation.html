@@ -1,0 +1,15 @@
+<!-- In your email template, e.g., email_confirmation.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Confirmation</title>
+</head>
+<body>
+    <h1>Email Confirmation</h1>
+    <p>Dear {{ student.first_name }},</p>
+    <p>Please click the link below to confirm your email:</p>
+    <a href="{{ confirmation_link }}">Confirm Email</a>
+</body>
+</html>

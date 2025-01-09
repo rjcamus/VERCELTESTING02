@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Navigation{% endblock %}</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+<header>
+    <div>
+        <img src="{% static 'Media/lab-logo.png' %}" alt="Lab Logo" width="150" height="150">
+    </div>
+
+    <nav>
+        <a href="#">HOME</a>
+        <a href="#rules">RULES</a>
+        <a href="#about-us">ABOUT US</a>
+        <a href="{% block tray_link %}{% endblock %}">TRAY</a>
+    </nav>        
+
+    <div>
+        <img src="{% static 'Media/profile-icon.png' %}" alt="Profile Icon" width="40" height="40">
+        <a href="{% url 'change_password' %}">Change Password</a>
+        <a href="{% url 'logout' %}">Log Out</a>
+    </div>
+</header>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

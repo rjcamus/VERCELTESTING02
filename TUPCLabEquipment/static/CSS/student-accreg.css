@@ -1,0 +1,142 @@
+/* Remove default margin and padding */
+ html, body {
+     margin: 0;
+     padding: 0;
+     height: auto; /* Ensures the body takes up the full height */
+ }
+
+ /* Custom Styles */
+ body {
+     font-family: 'Montserrat', sans-serif;
+     background: linear-gradient(135deg, #4e0000, #e2e6f1); /* Gradient background */
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh; /* Make the body take up the full height of the viewport */
+ }
+
+ .container {
+     max-width: 1000px; /* Wider container */
+     background-color: white; /* White background for the form */
+     border-radius: 10px; /* Rounded corners */
+     box-shadow: 0 0 15px rgba(0, 0, 0, 0.685); /* Subtle shadow */
+     padding: 30px;
+     margin-top: 20px;
+ }
+
+ h2 {
+     font-size: 2rem;
+     color: #2c3e50;
+     font-weight: bold;
+     text-align: center;
+ }
+
+ .form-label {
+     color: #36383a;
+     font-weight: bold;
+ }
+
+ .form-control, .form-select {
+     border-radius: 5px;
+     padding: 10px;
+     border: 1px solid #3b3b3b;
+     margin-bottom: 15px;
+ }
+
+ .form-control:focus, .form-select:focus {
+     border-color: #222222;
+     outline: none;
+     box-shadow: 0 0 5px rgba(0, 0, 0, 0);
+ }
+
+ .btn-primary {
+     background-color: #810000;
+     border: none;
+     padding: 12px 0;
+     font-size: 1.1rem;
+     border-radius: 5px;
+ }
+
+ .btn-primary:hover {
+     background-color: #570101;
+ }
+
+ .btn-primary:focus {
+     outline: none;
+     box-shadow: none;
+ }
+
+ /* Cancel Button Styling */
+ .btn-cancel {
+     color: white;
+     background-color: #494949;
+     border: none;
+     padding: 12px 0;
+     font-size: 1.1rem;
+     border-radius: 5px;
+     margin-top: 10px;
+ }
+
+ .btn-cancel:hover {
+     color: white;
+     background-color: #1b1b1b;
+ }
+
+ /* Icon Styling */
+ .form-label i {
+     margin-right: 10px;
+     color: red;  /* Changed icon color to red */
+ }
+
+ .row.mb-3 {
+     margin-bottom: 10px;
+ }
+
+ /* Fixing Grid Alignment */
+ .form-row {
+     display: flex;
+     justify-content: space-between;
+     flex-wrap: wrap;
+ }
+
+ .form-row .col-md-4 {
+     margin-bottom: 15px;
+ }
+
+ 
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    cursor: pointer;
+    color: #3b3b3b; /* Adjust as needed */
+    z-index: 10;
+}
+
+.password-toggle:hover {
+    color: #000000; /* Change color on hover if needed */
+}
+
+
+
+
+ /* Responsive Design */
+ @media (max-width: 768px) {
+     .container {
+         margin-top: 10px;
+         padding: 15px;  /* Padding for smaller screens */
+     }
+     h2 {
+         font-size: 1.5rem;
+     }
+     body {
+         margin: 20px;
+         padding: 0;
+         height: 100%; /* Ensures the body takes up the full height */
+     }
+
+     /* Ensure the inputs take full width on small screens */
+     .form-control, .form-select {
+         width: 100% !important; /* Force inputs to take up full width */
+     }
+ }

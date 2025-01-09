@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'CSS/records.css' %}">
+    <title>Document</title>
+</head>
+<body>
+<div class="container my-5">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped" cellspacing="0" cellpadding="10">
+            <thead>
+                <tr class="text-center">
+                    <th class="fs-6 fs-sm-5 fs-md-4">Name</th>
+                    <th class="fs-6 fs-sm-5 fs-md-4">Items Borrowed</th>
+                    <th class="fs-6 fs-sm-5 fs-md-4">Quantity</th>
+                    <th class="fs-6 fs-sm-5 fs-md-4">Date of Reservation</th>
+                    <th class="fs-6 fs-sm-5 fs-md-4">Date of Claim</th>
+                    <th class="fs-6 fs-sm-5 fs-md-4">Date of Return</th>
+                    <th class="fs-6 fs-sm-5 fs-md-4">Status</th>
+                    {% if position == "laboratory-staff" %}
+                        <th class="fs-6 fs-sm-5 fs-md-4">Action</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr class="text-center">
+                    <td>{{ record.name }}</td>
+                    <td>{{ record.items_borrowed }}</td>
+                    <td>{{ record.quantity }}</td>
+                    <td>{{ record.reservation_date }}</td>
+                    <td>{{ record.date_claim }}</td>
+                    <td>{{ record.date_returned }}</td>
+                    <td>{{ record.status }}</td>
+                    {% if position == "laboratory-staff" %}
+                        <td>
+                            {% if record.status == 'Accepted' %}
+                                <form method="POST" onsubmit="disablePage()">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="record_id" value="{{ record.id }}">
+                                    <input type="hidden" name="action" value="hand_in">
+                                    <button type="submit" class="btn btn-primary btn-sm" id="hand-in-btn-{{ record.id }}" {% if record.date_claim != current_date %}disabled{% endif %}>Hand In</button>
+                                </form>
+                            {% elif record.status == 'Handed In' or record.status == 'Overdue' %}
+                                <form method="POST" onsubmit="disablePage()">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="record_id" value="{{ record.id }}">
+                                    <input type="hidden" name="action" value="return">
+                                    <button type="submit" class="btn btn-success btn-sm">Return</button>
+                                </form>
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                </tr>
+                {% empty %}
+                <tr class="text-center">
+                    <td colspan="7">No records found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // Function to disable page interactions
+    function disablePage() {
+        // Prevent all mouse events
+        document.addEventListener('mousedown', preventDefault, true);
+        document.addEventListener('mouseup', preventDefault, true);
+        document.addEventListener('click', preventDefault, true);
+        document.addEventListener('contextmenu', preventDefault, true);
+
+        // Prevent all keyboard events
+        document.addEventListener('keydown', preventDefault, true);
+        document.addEventListener('keyup', preventDefault, true);
+    }
+
+    // Function to enable page interactions
+    function enablePage() {
+        // Restore all mouse events
+        document.removeEventListener('mousedown', preventDefault, true);
+        document.removeEventListener('mouseup', preventDefault, true);
+        document.removeEventListener('click', preventDefault, true);
+        document.removeEventListener('contextmenu', preventDefault, true);
+
+        // Restore all keyboard events
+        document.removeEventListener('keydown', preventDefault, true);
+        document.removeEventListener('keyup', preventDefault, true);
+    }
+
+    // Helper function to prevent default behavior
+    function preventDefault(e) {
+        e.preventDefault();
+    }
+
+    // Example of using these functions with page events
+    window.onload = enablePage; // Enable interactions when the page is fully loaded
+    window.onbeforeunload = disablePage; // Disable interactions when the page starts unloading
+</script>
+</body>
+</html>

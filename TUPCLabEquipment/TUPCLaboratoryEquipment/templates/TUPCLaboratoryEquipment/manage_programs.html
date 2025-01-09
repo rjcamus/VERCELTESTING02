@@ -1,0 +1,128 @@
+{% extends "labtechnav.html" %}
+
+{% block title %}
+User Management Dashboard
+{% endblock %}
+
+{% block content %}
+
+{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'CSS/manage-programs.css' %}">
+
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="w-100" style="max-width: 600px;">
+        <h1 class="text-center mb-4">MANAGE PROGRAMS</h1>
+        
+        <form id="program-form" method="post" class="mb-4">
+            {% csrf_token %}
+            <div class="mb-3">
+                <!-- New Program Name label centered -->
+                <label for="program-name" class="form-label text-center d-block mb-2">New Program Name:</label>
+                <!-- Use d-flex with flex-column on smaller screens and flex-row on larger screens -->
+                <div class="d-flex flex-column flex-sm-row">
+                    <input type="text" id="program-name" name="program-name" class="form-control me-3 mb-3 mb-sm-0" placeholder="Enter new program" required oninput="this.value = this.value.toUpperCase().replace(/[0-9]/g, '');">
+                    <button type="submit" class="btn btn-success">Add Program</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Table with Scrollable container -->
+<div class="table-responsive">
+    <table id="program-table" class="table table-bordered">
+        <thead>
+            <tr>
+                <!-- Control width for Program Name on larger screens and smaller screens -->
+                <th class="col-6 col-sm-4 col-md-6 col-lg-6 col-xl-6">Program Name</th>  
+                <!-- Control width for Action column, responsive on small screens -->
+                <th class="col-6 col-sm-7 col-md-6 col-lg-6 col-xl-6">Action</th> 
+            </tr>
+        </thead>
+        <tbody>
+            {% for program in programs %}
+            <tr data-id="{{ program.id }}">
+                <td>{{ program.program_name }}</td>
+                <td class="text-center">
+                    <div class="btn-group d-flex flex-column flex-sm-row">
+                        <button class="btn btn-primary btn-sm mb-2 ms-sm-3 me-sm-2 " onclick="editProgram(this)">Edit</button>
+                        <button class="btn btn-danger btn-sm mb-2 ms-sm-2 me-sm-3" onclick="deleteProgram(this)">Delete</button>
+                    
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% if messages %}
+<div class="alert alert-danger mt-3 mb-3">
+    <ul>
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+{% block extra_js %}
+<script>
+    function editProgram(button) {
+        const row = button.closest('tr');
+        const nameCell = row.cells[0];
+        const newName = prompt('Edit program name:', nameCell.textContent);
+        if (newName) {
+            const programId = row.getAttribute('data-id');
+            fetch("{% url 'manage_programs' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                body: new URLSearchParams({
+                    'program-name': newName,
+                    'program-id': programId,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    nameCell.textContent = data.program_name;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    }
+
+    function deleteProgram(button) {
+        const row = button.closest('tr');
+        const programId = row.getAttribute('data-id');
+        if (confirm('Are you sure you want to delete this program?')) {
+            fetch("{% url 'manage_programs' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                body: new URLSearchParams({
+                    'delete-id': programId,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    row.remove();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,219 @@
+{% load static %} <!-- Add this line at the top -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}HOMEPAGE{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'CSS/equipmentspage.css' %}">
+
+
+</head>
+<body>
+    <header id="home">
+        <div class="logo">
+            <img src="{% static 'Media/LOGO.png' %}" alt="Lab Logo">
+        </div>
+        <!-- Navbar with Burger Menu -->
+        <nav class="navbar navbar-expand-lg navbar-light w-100">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto w-100 justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#welcome-section">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#rules">RULES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about-us">ABOUT US</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% block tray_link %}{% endblock %}">TRAY</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Profile Section with Toggle -->
+        <div class="profile" onclick="toggleProfileLinks()">
+            <img src="{% static 'Media/PROFILE.png' %}" alt="Profile Icon" width="40" height="40">
+            <div class="profile-links" id="profileLinks" style="display: none;">
+                <a href="{% url 'change_password' %}">Change Password</a>
+                <a href="{% url 'logout' %}">Log Out</a>
+            </div>
+        </div>            
+    </header>
+    
+    <main>
+        <div id="welcome-section" class="container welcome-section py-5">
+            <div class="row justify-content-center">
+                <!-- Welcome Text Section -->
+                <div class="col-12 text-center">
+                    <h1>
+                        WELCOME, {{ first_name|upper }}!
+                    </h1>
+                    <h2>
+                        {% if position == "STUDENT" %}
+                            STUDENT: {{ student_id }}
+                        {% elif position == "FACULTY" %}
+                            FACULTY
+                        {% endif %}
+                    </h2>
+                    <p>Explore our range of laboratory equipment including glassware, tools, and equipment.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+       
+    
+    <!-- Glassware Section -->
+    <div class="category text-center mb-4">GLASSWARES</div>
+    <div class="container">
+        <div class="row justify-content-center mb-md-3">
+            {% for item in glassware_items %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3  col-xxl-3">
+                    <div class="carousel-item text-center">
+                        <img src="{{ item.image.url }}" class="card-img-top img-fluid" alt="{{ item.item }}">
+                        <div class="item-name">{{ item.item }}</div>
+                        <div class="quantity">Quantity: {{ item.quantity }}</div>
+                        <form method="post" action="{% url 'glassware' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="item_id" value="{{ item.id }}">
+                            <button type="submit" class="add-to-cart">Add to Tray</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="text-center">
+        <a href="{% url 'glassware' %}">
+            <button class="see-more-button mx-4">SEE MORE</button>
+        </a>
+    </div>
+
+    <!-- General Lab Tools Section -->
+    <div class="category text-center">GENERAL LAB TOOLS</div>
+    <div class="container">
+        <div class="row justify-content-center mb-md-3">
+            {% for item in labtools_items %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3  col-xxl-3">
+                    <div class="carousel-item text-center">
+                        <img src="{{ item.image.url }}" class="card-img-top img-fluid" alt="{{ item.item }}">
+                        <div class="item-name">{{ item.item }}</div>
+                        <div class="quantity">Quantity: {{ item.quantity }}</div>
+                        <form method="post" action="{% url 'labtools' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="item_id" value="{{ item.id }}">
+                            <button type="submit" class="add-to-cart">Add to Tray</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="text-center">
+        <a href="{% url 'labtools' %}">
+            <button class="see-more-button mx-4">SEE MORE</button>
+        </a>
+    </div>
+
+    <!-- Heavy Equipment Section -->
+    <div class="category text-center">HEAVY EQUIPMENTS</div>
+    <div class="container">
+        <div class="row justify-content-center mb-md-3">
+            {% for item in heavy_equipments_items %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3  col-xxl-3 ">
+                    <div class="carousel-item text-center">
+                        <img src="{{ item.image.url }}" class="card-img-top img-fluid" alt="{{ item.item }}">
+                        <div class="item-name">{{ item.item }}</div>
+                        <div class="quantity">Quantity: {{ item.quantity }}</div>
+                        <form method="post" action="{% url 'heavyequipments' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="item_id" value="{{ item.id }}">
+                            <button type="submit" class="add-to-cart">Add to Tray</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="text-center">
+        <a href="{% url 'heavyequipments' %}">
+            <button class="see-more-button mx-4">SEE MORE</button>
+        </a>
+    </div>
+
+    <div id="rules" class="rules-section">
+        <h2 class="text-center mb-4">IMPORTANT RULES FOR BORROWING EQUIPMENTS</h2>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10">
+                    <ul class="rules-list">
+                        <li class="fs-5">All equipment must be returned in the same condition it was borrowed.</li>
+                        <li class="fs-5">Notify staff of any damage or malfunction immediately.</li>
+                        <li class="fs-5">Ensure equipment is properly cleaned before returning.</li>
+                        <li class="fs-5">Borrowers are responsible for any loss or damage incurred while the equipment is in their possession.</li>
+                        <li class="fs-5">Personal items should not be left on or in the equipment.</li>
+                        <li class="fs-5">Follow all operating instructions provided with the equipment.</li>
+                        <li class="fs-5">Students are allowed to borrow only one quantity of each equipment per transaction.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <section>
+        <h2 class="videos-container text-center mb-4">VIDEOS</h2>
+        <div class="video-container container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-6 col-md-2 mb-3 d-flex justify-content-center">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe src="https://www.youtube.com/embed/chODOKSPJS4" title="Get to Know the Lab Tools and Equipment" class="embed-responsive-item" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-2 mb-3 d-flex justify-content-center">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe src="https://www.youtube.com/embed/_X6cCpONibE?si=hvLvaH2Dj2FBNWvN" title="General Safety in Laboratory" class="embed-responsive-item" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-2 mb-3 d-flex justify-content-center">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe src="https://www.youtube.com/embed/W0oacysFTko" title="Cleaning Laboratory Glassware" class="embed-responsive-item" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-2 mb-3 d-flex justify-content-center">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe src="https://www.youtube.com/embed/73OrxTT9VB0" title="How To: Lab Waste" class="embed-responsive-item" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-2 mb-3 d-flex justify-content-center">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe src="https://www.youtube.com/embed/jtgBwKQLpwA" title="Science Lab Safety" class="embed-responsive-item" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <div id="about-us" class="about-us my-5">
+            <h2>ABOUT US</h2>
+            <p>Welcome to our Laboratory Equipment site. We provide top-quality lab equipment for various scientific needs. Our mission is to support scientific research<br>and education by offering reliable and innovative products. Our team is dedicated to ensuring customer satisfaction and providing excellent service. <br> Thank you for visiting our site!</p>
+        </div>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'JavaScript/equipments.js' %}"></script>
+</body>
+</html>

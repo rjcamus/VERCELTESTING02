@@ -1,0 +1,42 @@
+{% extends "labstaffnav.html" %}
+
+{% block title %}
+Borrowing Transaction Records
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'CSS/labstaff-homepage.css' %}">
+
+<div class="container my-4">
+    <div class="text-center mb-3">
+        <h2>BORROWING TRANSACTION RECORDS</h2>
+    </div>
+    
+    <!-- Centered Search and Filter Options -->
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+            <input type="text" id="search-bar" class="form-control w-100 mb-2 mb-lg-0 me-lg-2" placeholder="Search..." style="max-width: 100000px;" onkeyup="searchByName()">
+
+            <select id="status-filter" class="form-select w-100 mb-2 mb-lg-0 mx-lg-2" onchange="filterByStatus()">
+                <option value="all">All</option>
+                <option value="accepted">Accepted</option>
+                <option value="handed in">Handed In</option>
+                <option value="returned">Returned</option>
+                <option value="overdue">Overdue</option>
+                <option value="void">Void</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Responsive Table -->
+    <div class="table-responsive mt-4">
+        {% include 'recordstable.html' %}
+    </div>
+</div>
+
+<script src="{% static 'JavaScript/labstaff.js' %}"></script>
+
+{% endblock %}

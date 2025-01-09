@@ -1,0 +1,69 @@
+{% extends "labtechnav.html" %}
+
+{% block title %}
+ADD EQUIPMENT
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'CSS/addequipment.css' %}">
+
+<div class="container">
+    <h1>ADD EQUIPMENT</h1>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <form action="{% url 'add_equipment' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="photo-preview border p-3 mb-3">
+                    <label for="fileInput" class="form-label">Image Preview</label>
+                    <input type="file" name="image" id="fileInput" accept="image/*" class="form-control mb-2" required onchange="previewImage(event)">
+                    <div id="imagePreviewContainer" class="border mt-2 p-2" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                        <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 100%; height: auto;"/>
+                        <p id="noImageSelected">No Image Selected</p>
+                    </div>
+                </div>
+        </div>
+        <div class="col-md-8">
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select name="category" id="category" class="form-select" required>
+                        <option value="" disabled selected>SELECT CATEGORY</option>
+                        <option value="glasswares">GLASSWARES</option>
+                        <option value="labtools">GENERAL LAB TOOLS</option>
+                        <option value="heavyequipments">HEAVY EQUIPMENTS</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="equipmentName" class="form-label">Equipment Name</label>
+                    <input type="text" name="item" id="equipmentName" class="form-control" placeholder="Enter equipment name" required oninput="this.value = this.value.toUpperCase().replace(/[0-9]/g, '');">
+                </div>                
+
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input type="number" name="quantity" id="quantity" class="form-control" min="1" max="100" placeholder="Enter quantity" required oninput="if (this.value > 100) this.value = 100;">
+                </div>
+                
+                <button type="submit" class="btn btn-submit btn-block" style="background-color: #8B0000; color: white;">SAVE</button>
+                {% if messages %}
+                <div class="alert alert-success mt-3 mb-3">
+                    <ul>
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %} 
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+
+{{ block.super }} <!-- Ensures parent template scripts are loaded first -->
+{% endblock %}

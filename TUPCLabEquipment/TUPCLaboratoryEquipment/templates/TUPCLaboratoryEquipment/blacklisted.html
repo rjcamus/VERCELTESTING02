@@ -1,0 +1,51 @@
+{% extends "labstaffnav.html" %}
+
+{% block title %}
+Blacklist
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'CSS/blacklisted.css' %}">
+
+<div class="blacklist-page">
+    <h1 class="text-center">BLACKLISTED USERS</h1>
+
+    <!-- Centered Search Input Field -->
+    <div class="d-flex justify-content-center my-3">
+        <input type="text" id="searchInput" class="form-control w-50" placeholder="Search by student name..." onkeyup="filterTable()">
+    </div>
+
+    <!-- Responsive Table Wrapper for All Screen Sizes -->
+    <div class="table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Borrowed Item</th>
+                    <th>Date Claimed</th>
+                    <th>Supposed Return Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in overdue_records %}
+                <tr>
+                    <td>{{ record.name }}</td>
+                    <td>{{ record.items_borrowed }}</td>
+                    <td>{{ record.date_claim }}</td>
+                    <td>{{ record.date_returned }}</td>            
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No blacklisted users found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="{% static 'JavaScript/labstaff.js' %}"></script>
+
+{% endblock %}

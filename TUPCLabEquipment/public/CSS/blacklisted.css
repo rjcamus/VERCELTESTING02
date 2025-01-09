@@ -1,0 +1,81 @@
+.blacklist-page {
+    font-family: 'Montserrat', sans-serif;
+    padding: 20px 50px; 
+    margin-top: 100px; 
+}
+
+.blacklist-page h1 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    color: #353535;
+    margin-bottom: 20px; 
+}
+
+.blacklist-page .btn-success {
+    color: #ffffff;
+    background-color: #750000;
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 2px;
+    transition: background-color 0.2s, color 0.2s, border 0.2s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.blacklist-page .btn-success:hover {
+    background-color: #420000;
+    color: #fff;
+    border-color: #420000;
+}
+
+.blacklist-page table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.795);
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #d3d3d3; 
+}
+
+.blacklist-page th,
+.blacklist-page td {
+    text-align: center;
+    padding: 13px;
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #d3d3d3; 
+}
+
+.blacklist-page th {
+    background-color: #f2f2f2;
+    color: #000000;
+    font-weight: bold;
+    border-bottom: 3px solid #000000; 
+}
+
+.blacklist-page tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.blacklist-page tr:hover {
+    background-color: #b2b2b3;
+}
+
+.blacklist-page ul {
+    list-style: disc;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.search-container {
+    margin: 20px 0; 
+    text-align: center;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-width: 600px; 
+}

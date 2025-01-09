@@ -1,0 +1,30 @@
+/* General Styling */
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container h2 {
+    font-size: 40px;
+    font-weight: 700;
+    color: #333;
+    margin-top: 100px;
+    margin-bottom: 20px;
+}
+
+/* Search Bar Styling */
+#search-bar {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+#search-bar:focus {
+    border-color: #410000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.596);
+}
+
+/* Select Dropdown Styling */
+#status-filter {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 8px 12px;
+}

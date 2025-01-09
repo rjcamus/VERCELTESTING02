@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Account Registration</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'CSS/student-accreg.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4">STUDENT ACCOOUNT REGISTRATION</h2>
+
+        <form action="{% url 'register_student' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="row mb-3">
+                <div class="col-md-6 col-12">
+                    <label for="first-name" class="form-label"><i class="fas fa-user"></i> FIRST NAME</label>
+                    <input type="text" id="first-name" name="first-name" class="form-control" placeholder="Enter your first name" required value="{{ first_name|default:'' }}" oninput="capitalizeWords(this); restrictNumbers(this)">
+                </div>
+                <div class="col-md-6 col-12">
+                    <label for="last-name" class="form-label">SURNAME</label>
+                    <input type="text" id="last-name" name="last-name" class="form-control" placeholder="Enter your surname" required value="{{ surname|default:'' }}" oninput="capitalizeWords(this); restrictNumbers(this)">
+                </div>
+            </div>
+
+            <div class="form-row mb-3">
+                <div class="col-md-4 col-12">
+                    <label for="student-id" class="form-label"><i class="fas fa-id-card"></i> STUDENT ID</label>
+                    <input type="text" id="student-id" name="student-id" class="form-control" placeholder="TUPC-##-####" value="{{ student_id|default:'' }}" maxlength="12" required oninput="formatStudentId(this)">
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <label for="program" class="form-label"><i class="fas fa-cogs"></i> PROGRAM</label>
+                    <select id="program" name="program" class="form-select" required>
+                        <option value="">Select a program</option>
+                        {% for program in programs %}
+                            <option value="{{ program.id }}" {% if program.id == program_id %}selected{% endif %}>{{ program.program_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <label for="certificate" class="form-label"><i class="fas fa-file-upload"></i> PROOF OF ENROLLMENT</label>
+                    <input type="file" id="certificate" name="certificate" class="form-control" accept=".pdf" {% if certificate %}value="{{ certificate|default:'' }}"{% endif %}>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label"><i class="fas fa-envelope"></i> EMAIL</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required value="{{ email|default:'' }}">
+            </div>
+
+            <div class="form-row mb-3">
+                <div class="col-md-6 col-12 position-relative">
+                    <label for="password" class="form-label"><i class="fas fa-lock"></i> PASSWORD</label>
+                    <div class="input-group">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+                        <i class="fas fa-eye password-toggle" id="togglePassword"></i> <!-- Eye logo -->
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 position-relative">
+                    <label for="confirm-password" class="form-label">CONFIRM PASSWORD</label>
+                    <div class="input-group">
+                        <input type="password" id="confirm-password" name="confirm-password" class="form-control" placeholder="Confirm your password" required>
+                        <i class="fas fa-eye password-toggle" id="toggleConfirmPassword"></i> <!-- Eye logo -->
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">SUBMIT</button>
+            <button type="button" class="btn btn-cancel w-100" onclick="window.location.href='/'">CANCEL</button>
+
+        
+            {% if messages %}
+            {% for message in messages %}
+                {% if "Password must be at least 8 characters" in message %}
+                <div class="alert alert-warning mt-2" id="password-warning">
+                    {{ message }}
+                </div>
+                {% elif "Passwords do not match!" in message %}
+                <div class="alert alert-danger mt-2" id="password-mismatch">
+                    {{ message }}
+                </div>
+                {% else %}
+                <div class="alert alert-danger mt-2">
+                    {{ message }}
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'JavaScript/studentacc.js' %}"></script>
+
+</body>
+</html>

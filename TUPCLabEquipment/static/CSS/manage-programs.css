@@ -1,0 +1,109 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #353535;
+    margin-top:  50px;
+}
+
+/* Program Form Input and Button Styles */
+.program-input {
+    flex-grow: 1;  /* Allow the input field to take available space */
+    margin-top: 0;
+
+}
+
+.btn:focus {
+    outline: none;          /* Removes the outline when the button is focused */
+    box-shadow: none;       /* Removes the box-shadow when the button is focused */
+    color: inherit;         /* Prevents text color change when focused */
+    background-color: inherit; /* Prevents background color change when focused */
+}
+
+.btn-primary {
+    background-color: #353535;
+    border: 2px solid transparent;  /* Border to match background when hovered */
+}
+/* Hover effect for the button */
+.btn-primary:hover {
+    background-color: #1b1b1b;  /* Darker red for hover */
+    color: #fff;  /* Ensure text stays white */
+    border-color: #1b1b1b;  /* Border color changes to match hover background */
+    border-radius: 2px;
+}
+
+.btn-danger {
+    background-color: #750000;
+    border: 2px solid transparent;  /* Border to match background when hovered */
+}
+/* Hover effect for the button */
+.btn-danger:hover {
+    background-color: #2c0000;  /* Darker red for hover */
+    color: #fff;  /* Ensure text stays white */
+    border-color: #2c0000;  /* Border color changes to match hover background */
+    border-radius: 2px;
+}
+
+/* Base styles for the button */
+.btn-success {
+    color: #ffffff;
+    background-color: #750000;
+    padding: 5px 10px;  /* Padding inside the button */
+    font-size: 15px;  /* Button font size */
+    font-weight: 600;
+    margin-bottom: 0;
+    white-space: nowrap;  /* Ensure the button text doesn't wrap */
+    border: 2px solid transparent;  /* Border to match background when hovered */
+    border-radius: 2px;
+    transition: background-color 0.2s, color 0.2s, border 0.2s; /* Smooth transition */
+}
+
+/* Hover effect for the button */
+.btn-success:hover {
+    background-color: #420000;  /* Darker red for hover */
+    color: #fff;  /* Ensure text stays white */
+    border-color: #420000;  /* Border color changes to match hover background */
+    border-radius: 2px;
+}
+
+
+/* Table Styles */
+.table-responsive {
+    overflow-x: auto; /* Enable horizontal scroll on smaller screens */
+    padding-left: 30px; /* Increase left padding */
+    padding-right: 30px; /* Increase right padding */
+}
+
+/* Ensure that the header stays on top */
+thead {
+    background-color: #ffffff;  /* Header background */
+    color: #000000;  /* Text color */
+    border-bottom: 2px solid #000000;  /* Border below the header */
+    font-weight: bold;  /* Bold header text */
+}
+
+/* Optional: Adjust table to have a consistent style */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);  /* Shadow for table */
+}
+
+th, td {
+    text-align: center;
+    padding: 10px;  /* Add padding for the cells */
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;  /* Zebra striping for rows */
+}
+
+tr:hover {
+    font-weight: 600;  /* Bold rows on hover */
+}
+

@@ -1,0 +1,166 @@
+{% extends "labtechnav.html" %}
+
+{% block title %}
+User Management Dashboard
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'CSS/manage-account.css' %}">
+<script src="{% static 'JavaScript/manage-acc.js' %}"></script>
+
+<h1 class="dashboard-label text-center fs-1 fs-md-2 fs-lg-3">USER MANAGEMENT DASHBOARD</h1>
+
+<!-- Tabs section -->
+<div class="d-flex justify-content-start ms-3 custom-tabs flex-wrap">
+    <button class="tab active btn btn-outline-primary fs-6 fs-md-5" onclick="openTab(event, 'accountManagement')">Account Management</button>
+    <button class="tab btn btn-outline-primary ms-2 fs-6 fs-md-5" onclick="openTab(event, 'accountApproval')">Account Approval</button>
+</div>
+
+<!-- Account Management Section -->
+<div id="accountManagement" class="tab-content active-content">
+    <div class="d-flex flex-column flex-md-row justify-content-center align-items-center mb-3 w-100">
+        <div class="status-label fs-3 fs-md-2 fs-lg-1 mb-2 mb-md-0">ACCOUNT MANAGEMENT</div>
+        <input 
+        type="text" 
+        id="search-management" 
+        class="form-control w-50 w-md-75" 
+        onkeyup="searchTable('search-management', 'account-management-table')" 
+        placeholder="Search by name...">
+    
+    </div>
+
+    <!-- Scrollable table for Account Management -->
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered account-management-table" id="account-management-table">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0, 'account-management-table')">Name</th>
+                    <th onclick="sortTable(1, 'account-management-table')">Position</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in active_students %}
+                <tr>
+                    <td>{{ user.first_name }} {{ user.surname }}</td>
+                    <td>Student</td>
+                    <td>{{ user.status }}</td>
+                    <td>
+                        <form method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="student_id" value="{{ user.id }}">
+                            {% if user.status == "Activated" %}
+                            <button type="submit" name="action" value="deactivate" class="toggle-button btn btn-danger">Deactivate</button>
+                            {% else %}
+                            <button type="submit" name="action" value="activate" class="toggle-button btn btn-success">Activate</button>
+                            {% endif %}
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% for staff in faculty_staff %}
+                <tr>
+                    <td>{{ staff.first_name }} {{ staff.surname }}</td>
+                    <td>
+                        {% if staff.position == "faculty" %}
+                        Faculty
+                        {% elif staff.position == "laboratory-staff" %}
+                        Laboratory Staff
+                        {% endif %}
+                    </td>
+                    <td>{{ staff.status }}</td>
+                    <td>
+                        <form method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="staff_id" value="{{ staff.id }}">
+                            {% if staff.status == "Activated" %}
+                            <button type="submit" name="action" value="deactivate" class="toggle-button btn btn-danger">Deactivate</button>
+                            {% else %}
+                            <button type="submit" name="action" value="activate" class="toggle-button btn btn-success">Activate</button>
+                            {% endif %}
+
+                            {% if messages %}
+                            <div class="alert alert-info mt-3 mb-3 fixed-bottom">
+                                <ul>
+                                    {% for message in messages %}
+                                        <span class="{{ message.tags }}">{{ message }}</span><br>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Account Approval Section -->
+<div id="accountApproval" class="tab-content">
+    <div class="d-flex flex-column flex-md-row justify-content-center align-items-center mb-3 w-100">
+        <div class="status-label fs-3 fs-md-2 fs-lg-1 mb-2 mb-md-0">ACCOUNT APPROVAL</div>
+    </div>
+
+    <!-- Scrollable table for Account Approval -->
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered account-approval-table" id="account-approval-table">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0, 'account-approval-table')">Name</th>
+                    <th onclick="sortTable(1, 'account-approval-table')">Email</th>
+                    <th>Student ID</th>
+                    <th>View</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in pending_approvals %}
+                <tr>
+                    <td>{{ user.first_name }} {{ user.surname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.student_id }}</td>
+                    <td>
+                        <form method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="student_id" value="{{ user.id }}">
+                            <button type="submit" name="action" value="view" class="toggle-button btn btn-info">View</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="student_id" value="{{ user.id }}">
+                            <button type="submit" name="action" value="approve" class="toggle-button btn btn-success">Approve</button>
+                            <button type="submit" name="action" value="reject" class="toggle-button btn btn-danger">Reject</button>
+
+                            {% if messages %}
+                            <div class="alert alert-danger mt-3 mb-3 fixed-bottom">
+                                <ul>
+                                    {% for message in messages %}
+                                        <span class="{{ message.tags }}">{{ message }}</span><br>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No pending approvals found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

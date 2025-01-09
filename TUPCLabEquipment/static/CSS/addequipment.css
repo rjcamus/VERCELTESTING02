@@ -1,0 +1,141 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Container Styling */
+.container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.815);
+    padding: 30px;
+    width: 100%;
+    max-width: 1200px; /* Max width for larger screens */
+    margin-top: auto; /* Adjust this value based on your navigation bar height */
+    margin-bottom: auto; /* Space from the bottom */
+}
+
+/* Navigation bar z-index for overlay */
+.labtechnav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it stays above the page content */
+}
+
+/* Heading Styling */
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #353535;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+/* Image Preview */
+.photo-preview {
+    border: 2px dashed #ccc;
+    padding: 1rem;
+    text-align: center;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Image Preview Container */
+#imagePreviewContainer {
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 280px;
+    height: auto; /* Adjust to auto for responsiveness */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Styling for form labels and inputs */
+label {
+    font-weight: 700;
+    margin-top: 1rem;
+}
+
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="number"] {
+    margin-bottom: 5px;
+}
+
+select {
+    margin-bottom: 15px;
+}
+
+/* Button Styling */
+.btn-submit {
+    background-color: #750000;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.btn-submit:hover {
+    color: #ccc;
+    background-color: #2c0000;
+}
+
+/* Make the layout more responsive */
+
+/* For medium screens (≥768px) */
+@media (min-width: 768px) {
+    .container {
+        padding: 20px; /* Reduce padding for smaller screens */
+        margin-top: 80px; /* Adjust top margin for small screens */
+        margin-bottom: 90px; /* Adjust bottom margin for small screens */
+    }
+    h1 {
+        font-size: 2rem; /* Make the heading smaller on smaller screens */
+    }
+    .photo-preview {
+        min-height: 200px; /* Adjust minimum height for image preview */
+    }
+    #imagePreviewContainer {
+        max-width: 100%; /* Allow image preview to take full width */
+        height: auto;
+    }
+}
+
+/* For very small screens (≤576px) */
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1.8rem; /* Further reduce heading size for very small screens */
+    }
+    .container {
+        margin-top: 80px; /* Reduce margin-top for very small screens */
+        margin-bottom: 30px; /* Reduce margin-bottom for very small screens */
+    }
+    .photo-preview {
+        min-height: 180px; /* Adjust minimum height for smaller screens */
+    }
+    #imagePreviewContainer {
+        max-width: 100%; /* Allow image preview to take full width */
+        height: auto;
+    }
+}

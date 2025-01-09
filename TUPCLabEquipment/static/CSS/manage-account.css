@@ -1,0 +1,178 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    overflow: hidden;
+}
+
+/* Centering h1 */
+h1 {
+    text-align: center;
+    margin-top: 100px;
+    font-size: 2.0rem;
+    font-weight: 700;
+    color: #353535;
+    margin-bottom: 30px;
+}
+
+.tabs {
+    display: flex;
+    cursor: pointer;
+    justify-content: left;
+    box-shadow: #00000041;
+}
+
+.tab {
+    padding: 5px 10px;
+    background-color: #ffffff;
+    color: rgb(36, 36, 36);
+    border: none;
+    border-radius: 5px 5px 0 0;
+    transition: background-color 0.3s;
+    font-weight: 700;
+    font-size: 15px;
+    margin-right: 10px;
+    justify-content: left;
+}
+
+.tab:hover {
+    background-color: #250100;
+    font-size: 50px;
+    color:white;
+}
+
+.tab.active {
+    background-color: #250100;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    background-color: white;
+    border-top: 1.5px solid #000000;
+    border-radius: 0 0 5px 5px;
+    margin-bottom: -1px;
+}
+
+.active-content {
+    display: block;
+}
+
+table {
+    width: 100%;  /* Make the table take up full width of its container */
+    max-width: 1200px;  /* Limit the maximum width of the table */
+    margin: 0 auto;  /* Center the table */
+    border-collapse: collapse;
+    margin-top: 5px;
+    font-size: 16px;
+    box-shadow: 5px 2px 8px rgba(0, 0, 0, 0.575);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+table th {
+    background-color: #353535;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+table td {
+    background-color: white;
+    color: #333;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.scrollable-table {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 20px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-container input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: auto;
+    margin-right: 10px;
+    outline: none; /* Remove focus outline */
+}
+
+.search-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #750000;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    outline: none; /* Remove focus outline */
+}
+
+.search-container button:hover {
+    background-color: #250100;
+}
+
+.toggle-button {
+    font-size: 12px;
+    padding: 4px 6px;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    background-color: #750000;
+    color: white;
+    font-weight: 700;
+    outline: none; /* Remove focus outline */
+}
+
+.toggle-button:hover {
+    background-color: #250100;
+}
+
+.status-label {
+    font-weight: bold;
+    margin-right: 0;
+    margin-right: 15px;
+    color: #575555;
+}
+
+.btninfo {
+    background-color: #750000;
+    color: white;
+    outline: none; /* Remove focus outline */
+}
+
+.btninfo:hover {
+    background-color: #270000;
+    color: white;
+}
+
+/* Remove focus styles for focused elements globally */
+:focus {
+    outline: none;
+    color: none;
+}
+

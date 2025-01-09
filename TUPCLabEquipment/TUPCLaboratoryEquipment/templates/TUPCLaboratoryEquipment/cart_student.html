@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Tray</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add CSS to position the Home button in the upper left corner */
+        .home-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="container">
+
+    <a href="{% url 'student_homepage' %}" class="btn btn-secondary home-button">Home</a>
+    <h1><b>TRAY</b></h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ITEMS</th>
+                <th>QUANTITY</th>
+                <th>ACTION</th> 
+            </tr>
+        </thead>
+        <tbody>
+            {% for cart_item in cart_items %}
+            <tr>
+                <td>{{ cart_item.item }}</td> 
+                <td>{{ cart_item.quantity }}</td> 
+                <td>
+                    <form method="POST" action="{% url 'cart_student' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="remove_item_id" value="{{ cart_item.id }}">
+                        <button type="submit" class="btn btn-danger btn-sm">REMOVE</button>  
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">Your tray is empty.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <form method="POST" action="{% url 'cart_student' %}" onsubmit="disablePage()">
+        {% csrf_token %}
+        <div class="input-group">
+            <label for="reservation-date" class="form-label mb-0">Select Reservation Date:</label>
+            <input type="date" id="reservation-date" name="reservation_date" required class="form-control" min="{{ today_date|date:'Y-m-d' }}">
+            <button type="submit" id="reserve-button" class="btn btn-maroon" {% if not cart_items %}disabled{% endif %}>Reserve</button>
+
+            {% if messages %}
+            <div class="alert alert-info mt-3 mb-3 fixed-bottom">
+                <ul>
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        </div>
+    </form>
+
+    <script src="{% static 'JavaScript/cart.js' %}"></script>
+
+</body>
+</html>
